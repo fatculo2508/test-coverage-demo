@@ -57,11 +57,11 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+        token: ${{ secrets.CODECOV_TOKEN }}  # Optional for public repos
         files: ./coverage.xml
         flags: python-${{ matrix.python-version }}
         name: codecov-python-${{ matrix.python-version }}
-        fail_ci_if_error: true
+        fail_ci_if_error: false  # Don't fail if Codecov upload has issues
         verbose: true
 
     # Alternative: Using Codecov CLI directly
