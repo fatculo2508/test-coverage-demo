@@ -1,0 +1,99 @@
+# Codecov Configuration
+# Place this file in your project root as codecov.yml
+# Documentation: https://docs.codecov.com/docs/codecov-yaml
+
+# Coverage configuration
+coverage:
+  precision: 2  # Number of decimal places
+  round: down   # Round down or up
+  range: "70...100"  # Color range (red to green)
+
+  # Status checks (GitHub/GitLab)
+  status:
+    project:
+      default:
+        target: 80%           # Target coverage
+        threshold: 2%         # Allow 2% drop
+        if_ci_failed: error   # Fail if CI fails
+        informational: false  # Block PR if below target
+
+    patch:
+      default:
+        target: 80%           # Target for new code
+        threshold: 2%
+        if_ci_failed: error
+
+    changes:
+      default:
+        if_ci_failed: error
+
+# Comment configuration
+comment:
+  layout: "header, diff, files, footer"
+  behavior: default  # Update the same comment
+  require_changes: false
+  require_base: false
+  require_head: true
+
+# Pull request comments
+  after_n_builds: 1  # Wait for N builds before commenting
+
+# Flags for organizing coverage (e.g., frontend, backend, unit, integration)
+flags:
+  unit:
+    paths:
+      - tests/unit
+    carryforward: true
+
+  integration:
+    paths:
+      - tests/integration
+    carryforward: true
+
+  frontend:
+    paths:
+      - src/frontend
+    carryforward: true
+
+  backend:
+    paths:
+      - src/backend
+    carryforward: true
+
+# Ignore paths
+ignore:
+  - "tests/**/*"
+  - "**/__tests__/**/*"
+  - "**/*.test.{js,jsx,ts,tsx}"
+  - "**/*.spec.{js,jsx,ts,tsx}"
+  - "**/node_modules/**/*"
+  - "**/venv/**/*"
+  - "**/__pycache__/**/*"
+  - "**/dist/**/*"
+  - "**/build/**/*"
+  - "**/.next/**/*"
+  - "**/coverage/**/*"
+  - "**/htmlcov/**/*"
+  - "**/*.config.{js,ts}"
+  - "**/setupTests.{js,ts}"
+
+# Parse coverage reports
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+# GitHub checks configuration
+github_checks:
+  annotations: true
+
+# Slack notifications (optional - requires setup)
+# slack:
+#   notify: true
+#   after_n_builds: 1
+#   branches:
+#     - main
+#     - master
