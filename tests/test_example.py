@@ -1,4 +1,5 @@
 """Example test file"""
+
 import pytest
 from src.calculator import add, subtract, multiply, divide, is_even, is_positive
 
